@@ -79,6 +79,33 @@ void displayEmpDetail_byId(Employee emp_arr[], int &emp_count, int target_employ
     }
 }
 
+/// @brief display employee details using employeeid uses the binary search technique.
+/// @param emp_arr
+/// @param start
+/// @param end
+/// @param target
+/// @return index of target element, if not present return -1.
+int displayEmpDetail_byId_BinarySearch(Employee emp_arr[], int start, int end, int target)
+{
+    if (start <= end)
+    {
+        int mid = start + (end - start) / 2;
+
+        if (emp_arr[mid].employeeid == target)
+        {
+            return mid;
+        }
+
+        if (emp_arr[mid].employeeid > target)
+        {
+            return displayEmpDetail_byId_BinarySearch(emp_arr, start, mid - 1, target);
+        }
+
+        return displayEmpDetail_byId_BinarySearch(emp_arr, mid + 1, end, target);
+    }
+    return -1;
+}
+
 /// @brief delete employee from array using employeeid
 /// @param emp_arr
 /// @param emp_count
@@ -245,6 +272,7 @@ int main()
     Employee emp_arr[10];
     int emp_count = 0;
     int choice = 0;
+    int index;
 
     do
     {
@@ -278,7 +306,19 @@ int main()
             // display employee details using employeeid
             cout << "Enter the employee id to display:";
             cin >> target_employeeid;
-            displayEmpDetail_byId(emp_arr, emp_count, target_employeeid);
+            // belowed used Linear search
+            // displayEmpDetail_byId(emp_arr, emp_count, target_employeeid);
+
+            // belowed used Binary search Technique
+            index = displayEmpDetail_byId_BinarySearch(emp_arr, 0, emp_count, target_employeeid);
+            if (index == -1)
+            {
+                cout << "Element is not Found! ";
+            }
+            else
+            {
+                cout << "Element found at index : " << index;
+            }
             break;
         case 5:
             // update employee details using employeeid
