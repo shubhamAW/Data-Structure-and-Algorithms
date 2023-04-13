@@ -1,0 +1,11 @@
+# ignore vs code folder
+.cph/
+.vscode/
+
+# ignore the exe files
+*.exe
+*.obj
+*.ilk
+*.pdb
+
+
